@@ -21,6 +21,7 @@ CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY 'root';
 GRANT ALL PRIVILEGES ON `workmeong`.* TO 'root'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
+USE `workmeong`;
 
 CREATE TABLE IF NOT EXISTS `image` (
                                        `image_id` BIGINT NOT NULL AUTO_INCREMENT,
