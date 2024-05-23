@@ -16,6 +16,7 @@ import goormthon10.workmeongshimmeong.domain.entity.Program;
 import goormthon10.workmeongshimmeong.domain.enums.MemberType;
 import goormthon10.workmeongshimmeong.domain.enums.ProgramStatus;
 import goormthon10.workmeongshimmeong.domain.repository.ImageRepository;
+import goormthon10.workmeongshimmeong.domain.repository.MemberRepository;
 import goormthon10.workmeongshimmeong.domain.repository.ProgramRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class ProgramService {
 
     private static final String IMAGE_DIR = "program";
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private final ProgramRepository programRepository;
     private final ImageRepository imageRepository;
     private final S3Uploader s3Uploader;
@@ -39,6 +41,9 @@ public class ProgramService {
     @Transactional
     public EnrollProgramResponse enrollSpace(EnrollProgramRequest request) throws ImageException {
         Member host = memberService.findMember(request.hostEmail(), MemberType.HOST);
+
+        host.updateDescription(request.description());
+        memberRepository.save(host);
 
         Program createdProgram = Program.builder()
                 .name(request.programName())
@@ -73,7 +78,7 @@ public class ProgramService {
                 .map(ImageResponse::from)
                 .toList();
 
-        return ProgramInfoResponse.of(findProgram, images);
+        return ProgramInfoResponse.of(findProgram, images, findProgram.getMember());
     }
 
     public ProgramInfosResponse findPrograms() {
