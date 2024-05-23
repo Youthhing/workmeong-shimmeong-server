@@ -25,6 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e, HttpServletRequest request) {
         log.error("비즈니스 로직 에러 발생 : {}", e.getErrorCode());
+        log.error("에러가 발생한 지점 {}, {}", request.getMethod(), request.getRequestURI());
         ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode(), request);
         return ResponseEntity.status(e.getErrorCode().getStatus()).body(errorResponse);
     }
@@ -32,6 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ImageException.class)
     public ResponseEntity<ErrorResponse> handleImageException(ImageException e, HttpServletRequest request) {
         log.error("비즈니스 로직 에러 발생 : {}", e.getErrorCode());
+        log.error("에러가 발생한 지점 {}, {}", request.getMethod(), request.getRequestURI());
         ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode(), request);
         return ResponseEntity.status(e.getErrorCode().getStatus()).body(errorResponse);
     }
@@ -39,6 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<ErrorResponse> handleSQLException(SQLException e, HttpServletRequest request){
         log.error("SQL 에러 발생");
+        log.error("에러가 발생한 지점 {}, {}", request.getMethod(), request.getRequestURI());
         ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.SQL_EXCEPTION, request);
         return ResponseEntity.status(500).body(errorResponse);
     }
