@@ -31,7 +31,7 @@ public class SecurityConfig {
             config.setAllowedHeaders(Collections.singletonList("*"));
             config.setAllowedMethods(Collections.singletonList("*"));
             config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000")); // ⭐️ 허용할 origin
-            config.setAllowCredentials(true);
+//            config.setAllowCredentials(true);
             return config;
         };
     }
