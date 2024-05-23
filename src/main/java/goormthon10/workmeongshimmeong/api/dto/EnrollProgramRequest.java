@@ -1,6 +1,6 @@
 package goormthon10.workmeongshimmeong.api.dto;
 
-import goormthon10.workmeongshimmeong.domain.enums.SpaceType;
+import goormthon10.workmeongshimmeong.domain.enums.ProgramCategory;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
-public record EnrollSpaceRequest(
+public record EnrollProgramRequest(
         @Email
         @NotBlank
         String hostEmail,
@@ -17,18 +17,16 @@ public record EnrollSpaceRequest(
         @NotNull
         String roadNameAddress,
         String description,
-
         @NotNull
-        LocalDate startDate,
+        String startDate,
         @NotNull
-        LocalDate endDate,
-
+        Long spendTime,
         @NotNull
-        SpaceType type,
-
+        ProgramCategory type,
         @NotNull
-        List<MultipartFile> images,
-
-        List<String> tagNames
+        Long price,
+        String chatLink,
+        @NotNull
+        List<MultipartFile> images
 ) {
 }
