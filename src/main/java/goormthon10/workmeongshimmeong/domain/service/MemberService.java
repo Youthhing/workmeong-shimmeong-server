@@ -17,12 +17,27 @@ public class MemberService {
 
     @Transactional
     public Member saveMember(String email, String phoneNumber, MemberType type) {
-        return memberRepository.save(Member.of(email, phoneNumber, type));
+        return memberRepository.save(Member.builder()
+                .email(email)
+                .phoneNumber(phoneNumber)
+                .type(type)
+                .build());
     }
 
     @Transactional
     public Member findMember(String email, String phoneNumber, MemberType type) {
         Optional<Member> maybeMember = memberRepository.findByEmailAndPhoneNumber(email, phoneNumber);
         return maybeMember.orElseGet(() -> saveMember(email, phoneNumber, type));
+    }
+
+    @Transactional
+    public Member findGuest(String email, String name, String phone) {
+        Optional<Member> maybeGuest = memberRepository.findByEmailAndPhoneNumber(email, phone);
+        return maybeGuest.orElseGet(() -> memberRepository.save(Member.builder()
+                .email(email)
+                .name(name)
+                .phoneNumber(phone)
+                .type(MemberType.GUEST)
+                .build()));
     }
 }
