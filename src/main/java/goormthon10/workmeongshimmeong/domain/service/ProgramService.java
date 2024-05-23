@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.domain.service;
 
+import goormthon10.workmeongshimmeong.api.dto.ChatLinkResponse;
 import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramResponse;
@@ -76,11 +77,11 @@ public class ProgramService {
     }
 
     public ProgramInfosResponse findPrograms() {
-        List<ProgramMinInfoResponse> availableSpaces = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
+        List<ProgramMinInfoResponse> availablePrograms = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
                 .stream()
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
                 .toList();
-        return ProgramInfosResponse.from(availableSpaces);
+        return ProgramInfosResponse.from(availablePrograms);
     }
 
     private String findMainImages(Program program) {
@@ -93,5 +94,11 @@ public class ProgramService {
         Program findProgram = programRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
         return DateResponse.from(findProgram);
+    }
+
+    public ChatLinkResponse findChatLink(Long id) {
+        Program findProgram = programRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 프로그램은 존재하지 않습니다."));
+        return new ChatLinkResponse(findProgram.getChatLink());
     }
 }

@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.api.controller;
 
+import goormthon10.workmeongshimmeong.api.dto.ChatLinkResponse;
 import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramResponse;
@@ -40,6 +41,7 @@ public class ProgramController {
         return ResponseEntity.ok(programService.findProgramInfo(id));
     }
 
+    @ApiResponse(description = "프로그램 전체 정보 조회 API")
     @GetMapping
     public ResponseEntity<ProgramInfosResponse> getProgramInfos() {
         return ResponseEntity.ok().body(programService.findPrograms());
@@ -48,5 +50,11 @@ public class ProgramController {
     @GetMapping("/date/{program-id}")
     public ResponseEntity<DateResponse> getAvailableReservationDate(@PathVariable("program-id") Long id) {
         return ResponseEntity.ok().body(programService.getAvailableDate(id));
+    }
+
+    @ApiResponse(description = "프로그램 오픈 채팅방 링크 조회 API")
+    @GetMapping("/{program-id}/chat-link")
+    public ResponseEntity<ChatLinkResponse> getChatLink(@PathVariable("program-id") Long id) {
+        return ResponseEntity.ok().body(programService.findChatLink(id));
     }
 }

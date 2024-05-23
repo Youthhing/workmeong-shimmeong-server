@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -35,31 +36,23 @@ public class Reservation {
     @ColumnDefault(value = "'WAITING'")
     private ReservationStatus status;
 
-    @Column(name = "reservation_start", nullable = false)
-    private LocalDate startDate;
-
-    @Column(name = "reservation_end", nullable = false)
-    private LocalDate endDate;
-
-    @Column(name = "reservation_nubmer", nullable = false, unique = true)
-    private UUID number;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_id")
-    private Space space;
+    private Program program;
 
     @Column(name = "guest_id", nullable = false)
     private Long guestId;
 
-    private Reservation(LocalDate startDate, LocalDate endDate, Space space, Long guestId) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.space = space;
+    @Column(name = "reservation_request", columnDefinition = "TEXT")
+    private String request;
+
+    private Reservation(Program program, Long guestId, String request) {
+        this.program = program;
         this.guestId = guestId;
-        this.number = UUID.randomUUID();
+        this.request = request;
     }
 
-    public static Reservation of(LocalDate startDate, LocalDate endDate, Space space, Long guestId) {
-        return new Reservation(startDate, endDate, space, guestId);
+    public static Reservation of(Program program, Long guestId, String request) {
+        return new Reservation(program, guestId, request);
     }
 }
