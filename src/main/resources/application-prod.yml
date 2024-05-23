@@ -20,6 +20,10 @@ spring:
       default_batch_fetch_size: 100
     open-in-view: false
 
+  sql:
+    init:
+      mode: always
+
 logging:
   level:
     '[com.example.kakao]': INFO
