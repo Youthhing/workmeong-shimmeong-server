@@ -1,11 +1,11 @@
 #!/bin/bash
 
 PROJECT_NAME="workmeong-shimmeong-server"
-JAR_PATH="/home/ubuntu/backend/$PROJECT_NAME/build/libs/*.jar"
-DEPLOY_PATH=/home/ubuntu/backend/$PROJECT_NAME/
-DEPLOY_LOG_PATH="/home/ubuntu/backend/$PROJECT_NAME/deploy_$(date +%Y%m%d).log"
-DEPLOY_ERR_LOG_PATH="/home/ubuntu/backend/$PROJECT_NAME/deploy_err_$(date +%Y%m%d).log"
-APPLICATION_LOG_PATH="/home/ubuntu/backend/$PROJECT_NAME/application_$(date +%Y%m%d).log"
+JAR_PATH="/home/ubuntu/youth/backend/$PROJECT_NAME/build/libs/*.jar"
+DEPLOY_PATH=/home/ubuntu/youth/backend/$PROJECT_NAME/
+DEPLOY_LOG_PATH="/home/ubuntu/youth/backend/$PROJECT_NAME/deploy_$(date +%Y%m%d).log"
+DEPLOY_ERR_LOG_PATH="/home/ubuntu/youth/backend/$PROJECT_NAME/deploy_err_$(date +%Y%m%d).log"
+APPLICATION_LOG_PATH="/home/ubuntu/youth/backend/$PROJECT_NAME/application_$(date +%Y%m%d).log"
 BUILD_JAR=$(ls $JAR_PATH)
 JAR_NAME=$(basename $BUILD_JAR)
 
@@ -32,7 +32,7 @@ fi
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG_PATH
 
-nohup java -jar -Dspring.profiles.active=local $DEPLOY_JAR --server.port=8080  >> $APPLICATION_LOG_PATH 2> $DEPLOY_ERR_LOG_PATH &
+nohup java -jar -Dspring.profiles.active=local $DEPLOY_JAR --server.port=9000  >> $APPLICATION_LOG_PATH 2> $DEPLOY_ERR_LOG_PATH &
 
 sleep 3
 echo "> 배포 종료 : $(date +%c)" >> $DEPLOY_LOG_PATH
