@@ -14,3 +14,5 @@ CREATE TABLE `sample_data` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO sample_data (`id`,`detail`) VALUES ('1', 'Hello DKOS!');
+
+CREATE DATABASE IF NOT EXISTS workmeong;
