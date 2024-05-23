@@ -9,4 +9,6 @@ public interface TagRepository extends JpaRepository<TagEntity, Long> {
 
     @Query("select distinct t from TagEntity t")
     List<TagEntity> findDistinctTagNames();
+
+    List<TagEntity> findAllBySpaceId(Long spaceId);
 }

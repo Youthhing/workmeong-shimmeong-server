@@ -13,8 +13,6 @@ public record EnrollSpaceRequest(
         @NotBlank
         String hostEmail,
         @NotNull
-        String hostPhone,
-        @NotNull
         String spaceName,
         @NotNull
         String roadNameAddress,

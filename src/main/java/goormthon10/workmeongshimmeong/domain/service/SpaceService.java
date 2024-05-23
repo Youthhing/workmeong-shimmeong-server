@@ -1,7 +1,9 @@
 package goormthon10.workmeongshimmeong.domain.service;
 
+import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceResponse;
+import goormthon10.workmeongshimmeong.api.dto.ImageResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfoResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfosResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceMinInfoResponse;
@@ -38,7 +40,7 @@ public class SpaceService {
 
     @Transactional
     public EnrollSpaceResponse enrollSpace(EnrollSpaceRequest request) throws ImageException {
-        Member host = memberService.findMember(request.hostEmail(), request.hostPhone(), MemberType.HOST);
+        Member host = memberService.findMember(request.hostEmail(), MemberType.HOST);
 
         Space createdSpace = Space.builder()
                 .name(request.spaceName())
@@ -71,12 +73,19 @@ public class SpaceService {
         Space findSpace = spaceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 숙소의 상세페이지를 찾을 수 없습니다."));
 
-        return SpaceInfoResponse.of(findSpace, findSpace.getMember());
+        List<ImageResponse> images = imageRepository.findAllBySpaceId(findSpace.getId()).stream()
+                .map(ImageResponse::from)
+                .toList();
+        List<String> tags = tagRepository.findAllBySpaceId(findSpace.getId()).stream()
+                .map(TagEntity::getTag)
+                .toList();
+
+        return SpaceInfoResponse.of(findSpace, images, tags);
     }
 
     public SpaceInfosResponse findSpaces() {
         List<SpaceMinInfoResponse> availableSpaces = spaceRepository.findAllByStatus(SpaceStatus.AVAILABLE).stream()
-                .map(space -> SpaceMinInfoResponse.of(space, findMainImages(space)))
+                .map(space -> SpaceMinInfoResponse.of(space, findMainImages(space), findTags(space)))
                 .toList();
         return SpaceInfosResponse.from(availableSpaces);
     }
@@ -85,5 +94,17 @@ public class SpaceService {
         List<ImageEntity> images = imageRepository.findAllBySpaceId(space.getId());
         ImageEntity mainImage = images.get(0);
         return mainImage.getUrl();
+    }
+
+    private List<String> findTags(Space space) {
+        return tagRepository.findAllBySpaceId(space.getId()).stream()
+                .map(TagEntity::getTag)
+                .toList();
+    }
+
+    public DateResponse getAvailableDate(Long id) {
+        Space findSpace = spaceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
+        return DateResponse.from(findSpace);
     }
 }
