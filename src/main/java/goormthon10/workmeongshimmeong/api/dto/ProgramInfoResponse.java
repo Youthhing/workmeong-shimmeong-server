@@ -14,7 +14,6 @@ public record ProgramInfoResponse(
         Long spendTime,
         Long price,
         List<ImageResponse> images,
-
         String hostDescription
 
 ) {
