@@ -40,7 +40,7 @@ public class SpaceService {
 
     @Transactional
     public EnrollSpaceResponse enrollSpace(EnrollSpaceRequest request) throws ImageException {
-        Member host = memberService.findMember(request.hostEmail(), request.hostPhone(), MemberType.HOST);
+        Member host = memberService.findMember(request.hostEmail(), MemberType.HOST);
 
         Space createdSpace = Space.builder()
                 .name(request.spaceName())
@@ -96,7 +96,7 @@ public class SpaceService {
         return mainImage.getUrl();
     }
 
-    private List<String> findTags(Space space){
+    private List<String> findTags(Space space) {
         return tagRepository.findAllBySpaceId(space.getId()).stream()
                 .map(TagEntity::getTag)
                 .toList();

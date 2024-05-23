@@ -16,18 +16,17 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Member saveMember(String email, String phoneNumber, MemberType type) {
+    public Member saveMember(String email, MemberType type) {
         return memberRepository.save(Member.builder()
                 .email(email)
-                .phoneNumber(phoneNumber)
                 .type(type)
                 .build());
     }
 
     @Transactional
-    public Member findMember(String email, String phoneNumber, MemberType type) {
-        Optional<Member> maybeMember = memberRepository.findByEmailAndPhoneNumber(email, phoneNumber);
-        return maybeMember.orElseGet(() -> saveMember(email, phoneNumber, type));
+    public Member findMember(String email, MemberType type) {
+        Optional<Member> maybeMember = memberRepository.findByEmail(email);
+        return maybeMember.orElseGet(() -> saveMember(email, type));
     }
 
     @Transactional
