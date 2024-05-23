@@ -68,7 +68,7 @@ public class ProgramService {
 
         List<ImageEntity> images = new ArrayList<>();
 
-        if (!request.images().isEmpty()) {
+        if (request.images() != null && !request.images().isEmpty()) {
             for (int i = 0; i < request.images().size(); i++) {
                 String imageUrl = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
                 ImageEntity imageEntity = ImageEntity.of(imageUrl, i, createdProgram);
