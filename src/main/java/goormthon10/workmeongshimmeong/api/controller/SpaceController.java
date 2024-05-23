@@ -33,7 +33,7 @@ public class SpaceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(spaceService.enrollSpace(request));
     }
 
-    @GetMapping("{space-id}")
+    @GetMapping("/{space-id}")
     public ResponseEntity<SpaceInfoResponse> getSpaceInfo(@PathVariable("space-id") Long id) {
         return ResponseEntity.ok(spaceService.findSpaceInfo(id));
     }
