@@ -72,7 +72,14 @@ public class SpaceService {
         Space findSpace = spaceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 숙소의 상세페이지를 찾을 수 없습니다."));
 
-        return SpaceInfoResponse.of(findSpace, findSpace.getMember());
+        List<String> images = imageRepository.findAllBySpaceId(findSpace.getId()).stream()
+                .map(ImageEntity::getUrl)
+                .toList();
+        List<String> tags = tagRepository.findAllBySpaceId(findSpace.getId()).stream()
+                .map(TagEntity::getTag)
+                .toList();
+
+        return SpaceInfoResponse.of(findSpace, images, tags);
     }
 
     public SpaceInfosResponse findSpaces() {
