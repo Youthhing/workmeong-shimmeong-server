@@ -1,13 +1,21 @@
 package goormthon10.workmeongshimmeong.api.dto;
 
-import goormthon10.workmeongshimmeong.domain.entity.Reservation;
-import java.util.UUID;
+import goormthon10.workmeongshimmeong.domain.entity.Member;
+import goormthon10.workmeongshimmeong.domain.entity.Program;
 
 public record ReservationResponse(
-        UUID reservationNumber
+        String reservationTime,
+        String guestName,
+        String email,
+        String chatLink
 ) {
 
-    public static ReservationResponse from(Reservation createdReservation) {
-        return new ReservationResponse(createdReservation.getNumber());
+    public static ReservationResponse of(Program program, Member member) {
+        return new ReservationResponse(
+                program.getStartDateTime(),
+                member.getName(),
+                member.getEmail(),
+                program.getChatLink()
+        );
     }
 }

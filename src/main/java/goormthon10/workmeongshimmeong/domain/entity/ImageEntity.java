@@ -32,15 +32,15 @@ public class ImageEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_id")
-    private Space space;
+    private Program program;
 
-    private ImageEntity(String url, Integer order, Space space) {
+    private ImageEntity(String url, Integer order, Program program) {
         this.url = url;
         this.order = order;
-        this.space = space;
+        this.program = program;
     }
 
-    public static ImageEntity of(String url, Integer order, Space space) {
-        return new ImageEntity(url, order, space);
+    public static ImageEntity of(String url, Integer order, Program program) {
+        return new ImageEntity(url, order, program);
     }
 }

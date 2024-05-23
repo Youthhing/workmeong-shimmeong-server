@@ -1,6 +1,6 @@
 package goormthon10.workmeongshimmeong.domain.enums;
 
-public enum SpaceStatus {
+public enum ProgramStatus {
 
     AVAILABLE,
     RESERVED,

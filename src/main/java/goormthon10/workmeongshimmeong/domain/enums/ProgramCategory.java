@@ -3,7 +3,7 @@ package goormthon10.workmeongshimmeong.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum SpaceType {
+public enum ProgramCategory {
 
     CAFE,
     ACCOMMODATION,
