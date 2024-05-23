@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public enum ProgramCategory {
 
-    CAFE,
-    ACCOMMODATION,
-    CONFERENCE,
-    COWORKING,
-    STUDIO,
-    GALLERY
+    COOKING,
+    HEALTH,
+    ACTIVITIES,
+    SEMINAR,
+    ARTS,
+    ETC
 }
