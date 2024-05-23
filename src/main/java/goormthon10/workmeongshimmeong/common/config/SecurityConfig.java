@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         http.authenticationManager(authenticationManager);
         http.httpBasic(AbstractHttpConfigurer::disable)
-                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource())) // ⭐️⭐️⭐️
+                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .addFilter(corsFilter)
