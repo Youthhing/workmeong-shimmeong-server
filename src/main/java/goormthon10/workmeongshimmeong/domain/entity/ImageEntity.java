@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name = "image")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ImageEntity {
 
@@ -26,11 +27,11 @@ public class ImageEntity {
     @Column(name = "image_url", length = 500)
     private String url;
 
-    @Column(name = "image_order")
+    @Column(name = "image_order", nullable = false)
     private Integer order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "space_id")
+    @JoinColumn(name = "program_id")
     private Program program;
 
     private ImageEntity(String url, Integer order, Program program) {
