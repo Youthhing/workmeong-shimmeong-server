@@ -21,8 +21,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler()
-    public ResponseEntity<ErrorResponse> businessExceptionHandler(BusinessException e, HttpServletRequest request) {
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e, HttpServletRequest request) {
+        log.error("비즈니스 로직 에러 발생 : {}", e.getErrorCode());
+        ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode(), request);
+        return ResponseEntity.status(e.getErrorCode().getStatus()).body(errorResponse);
+    }
+
+    @ExceptionHandler(ImageException.class)
+    public ResponseEntity<ErrorResponse> handleImageException(ImageException e, HttpServletRequest request) {
         log.error("비즈니스 로직 에러 발생 : {}", e.getErrorCode());
         ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode(), request);
         return ResponseEntity.status(e.getErrorCode().getStatus()).body(errorResponse);
