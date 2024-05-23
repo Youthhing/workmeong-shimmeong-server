@@ -24,9 +24,18 @@ public class MemberService {
     }
 
     @Transactional
-    public Member findMember(String email, MemberType type) {
+    public Member findMember(String email, String description, MemberType type) {
         Optional<Member> maybeMember = memberRepository.findByEmail(email);
-        return maybeMember.orElseGet(() -> saveMember(email, type));
+        if (maybeMember.isPresent()) {
+            return maybeMember.get();
+        } else {
+            return memberRepository.save(Member.builder()
+                    .email(email)
+                    .description(description)
+                    .type(type)
+                    .build());
+
+        }
     }
 
     @Transactional

@@ -27,7 +27,7 @@ public class ImageEntity {
     @Column(name = "image_url", length = 500)
     private String url;
 
-    @Column(name = "image_order", nullable = false)
+    @Column(name = "image_order")
     private Integer order;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -39,10 +39,10 @@ public class Program {
     @Column(name = "program_road_name_address", nullable = false)
     private String roadNameAddress;
 
-    @Column(name = "program_start_time", nullable = false)
+    @Column(name = "program_start_time")
     private String startDateTime;
 
-    @Column(name = "program_time", nullable = false)
+    @Column(name = "program_time")
     private Long spendTime;
 
     @Column(name = "program_chat_link")
