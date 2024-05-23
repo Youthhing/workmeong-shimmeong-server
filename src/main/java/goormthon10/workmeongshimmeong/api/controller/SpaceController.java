@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Space", description = "장소 등록 관련 API 입니다.")
 @RestController
-@RequestMapping("/api/space")
+@RequestMapping("/api/spaces")
 @RequiredArgsConstructor
 public class SpaceController {
 
