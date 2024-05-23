@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.api.controller;
 
+import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfoResponse;
@@ -41,5 +42,10 @@ public class SpaceController {
     @GetMapping
     public ResponseEntity<SpaceInfosResponse> getSpaceInfos() {
         return ResponseEntity.ok().body(spaceService.findSpaces());
+    }
+
+    @GetMapping("/date/{space-id}")
+    public ResponseEntity<DateResponse> getAvailableReservationDate(@PathVariable("space-id") Long id) {
+        return ResponseEntity.ok().body(spaceService.getAvailableDate(id));
     }
 }

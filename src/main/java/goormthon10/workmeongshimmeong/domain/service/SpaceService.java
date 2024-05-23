@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.domain.service;
 
+import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfoResponse;
@@ -85,5 +86,11 @@ public class SpaceService {
         List<ImageEntity> images = imageRepository.findAllBySpaceId(space.getId());
         ImageEntity mainImage = images.get(0);
         return mainImage.getUrl();
+    }
+
+    public DateResponse getAvailableDate(Long id) {
+        Space findSpace = spaceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
+        return DateResponse.from(findSpace);
     }
 }
