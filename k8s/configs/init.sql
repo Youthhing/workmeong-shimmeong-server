@@ -16,7 +16,7 @@
 -- INSERT INTO sample_data (`id`,`detail`) VALUES ('1', 'Hello DKOS!');
 
 CREATE SCHEMA IF NOT EXISTS `workmeong` DEFAULT CHARACTER SET utf8mb4;
-ㅕGRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;
 GRANT ALL ON workmeong.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 
