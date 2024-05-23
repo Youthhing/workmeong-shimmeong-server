@@ -16,8 +16,11 @@
 -- INSERT INTO sample_data (`id`,`detail`) VALUES ('1', 'Hello DKOS!');
 
 CREATE SCHEMA IF NOT EXISTS `workmeong` DEFAULT CHARACTER SET utf8mb4;
-GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;
-GRANT ALL ON workmeong.* TO 'root'@'localhost';
+
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY 'root';
+GRANT ALL PRIVILEGES ON `workmeong`.* TO 'root'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+
+
 
 -- CREATE DATABASE IF NOT EXISTS workmeong;
