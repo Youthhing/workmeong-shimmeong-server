@@ -2,6 +2,7 @@ package goormthon10.workmeongshimmeong.common.error;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("비즈니스 로직 에러 발생 : {}", e.getErrorCode());
         ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode(), request);
         return ResponseEntity.status(e.getErrorCode().getStatus()).body(errorResponse);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<ErrorResponse> handleSQLException(SQLException e, HttpServletRequest request){
+        log.error("SQL 에러 발생");
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.SQL_EXCEPTION, request);
+        return ResponseEntity.status(500).body(errorResponse);
     }
 }
