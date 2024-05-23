@@ -24,7 +24,7 @@ public record EnrollProgramRequest(
 //        @NotNull
         Long spendTime,
 //        @NotNull
-        ProgramCategory type,
+        ProgramCategory category,
 //        @NotNull
         Long price,
         String chatLink,
