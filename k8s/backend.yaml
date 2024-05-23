@@ -21,6 +21,16 @@ spec:
               value: Asia/Seoul
             - name: DATABASE_URL
               value: jdbc:mariadb://mariadb:3306/workmeong
+            - name: S3_ACCESS
+              valueFrom:
+                secretKeyRef:
+                  key: S3_ACCESS
+                  name: backend-env
+            - name: S3_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: S3_SECRET
+                  name: backend-env
           resources:
             requests:
               memory: 1Gi
