@@ -84,7 +84,7 @@ public class SpaceService {
 
     public SpaceInfosResponse findSpaces() {
         List<SpaceMinInfoResponse> availableSpaces = spaceRepository.findAllByStatus(SpaceStatus.AVAILABLE).stream()
-                .map(space -> SpaceMinInfoResponse.of(space, findMainImages(space)))
+                .map(space -> SpaceMinInfoResponse.of(space, findMainImages(space), findTags(space)))
                 .toList();
         return SpaceInfosResponse.from(availableSpaces);
     }
@@ -93,6 +93,12 @@ public class SpaceService {
         List<ImageEntity> images = imageRepository.findAllBySpaceId(space.getId());
         ImageEntity mainImage = images.get(0);
         return mainImage.getUrl();
+    }
+
+    private List<String> findTags(Space space){
+        return tagRepository.findAllBySpaceId(space.getId()).stream()
+                .map(TagEntity::getTag)
+                .toList();
     }
 
     public DateResponse getAvailableDate(Long id) {
