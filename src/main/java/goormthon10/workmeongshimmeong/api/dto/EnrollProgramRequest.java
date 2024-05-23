@@ -4,7 +4,6 @@ import goormthon10.workmeongshimmeong.domain.enums.ProgramCategory;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +12,7 @@ public record EnrollProgramRequest(
         @NotBlank
         String hostEmail,
         @NotNull
-        String spaceName,
+        String programName,
         @NotNull
         String roadNameAddress,
         String description,

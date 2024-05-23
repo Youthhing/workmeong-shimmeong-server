@@ -15,4 +15,5 @@ cloud:
       accessKey: ${S3_ACCESS}
       secretKey: ${S3_SECRET}
     stack.auto: false
-    region.static: ap-northeast-2
+    region:
+      static: ap-northeast-2
