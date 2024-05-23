@@ -12,10 +12,10 @@ spec:
       labels:
         app: backend
     spec:
-      containers:
+        containers:
         - name: backend
           # 여러분의 backend image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/backend-7d864f49f-pr49g:latest
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_edb2f6755d12:latest
           env:
             - name: TZ
               value: Asia/Seoul
