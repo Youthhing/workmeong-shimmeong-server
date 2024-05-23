@@ -10,7 +10,7 @@ spring:
 cloud:
   aws:
     s3:
-      bucket: ${S3_BUCKET}
+      bucket: "workmeong"
     credentials:
       accessKey: ${S3_ACCESS}
       secretKey: ${S3_SECRET}

@@ -12,15 +12,25 @@ spec:
       labels:
         app: backend
     spec:
-      containers:
+        containers:
         - name: backend
           # 여러분의 backend image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_edb2f6755d12:latest
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_4090220edaa7:latest
           env:
             - name: TZ
               value: Asia/Seoul
             - name: DATABASE_URL
               value: jdbc:mariadb://mariadb:3306/workmeong
+            - name: S3_ACCESS
+              valueFrom:
+                secretKeyRef:
+                  key: S3_ACCESS
+                  name: backend-env
+            - name: S3_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: S3_SECRET
+                  name: backend-env
           resources:
             requests:
               memory: 1Gi
