@@ -33,10 +33,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberType type;
 
-    @Column(name = "member_phone", nullable = false)
+    @Column(name = "member_phone")
     private String phoneNumber;
 
-    @Column(name = "member_description", columnDefinition = "TEXT")
+    @Column(name = "member_description", length = 500)
     private String description;
 
     @Builder

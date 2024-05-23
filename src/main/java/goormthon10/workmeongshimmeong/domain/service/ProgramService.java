@@ -40,7 +40,7 @@ public class ProgramService {
 
     @Transactional
     public EnrollProgramResponse enrollSpace(EnrollProgramRequest request) throws ImageException {
-        Member host = memberService.findMember(request.hostEmail(), MemberType.HOST);
+        Member host = memberService.findMember(request.hostEmail(), request.description(), MemberType.HOST);
 
         host.updateDescription(request.description());
         memberRepository.save(host);
@@ -52,6 +52,7 @@ public class ProgramService {
                 .category(request.type())
                 .description(request.description())
                 .member(host)
+                .startDateTime(request.startDate())
                 .price(request.price())
                 .chatLink(request.chatLink())
                 .spendTime(request.spendTime())
@@ -60,12 +61,15 @@ public class ProgramService {
         programRepository.save(createdProgram);
 
         List<ImageEntity> images = new ArrayList<>();
-        for (int i = 0; i < request.images().size(); i++) {
-            String imageUrl = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
-            ImageEntity imageEntity = ImageEntity.of(imageUrl, i, createdProgram);
-            images.add(imageEntity);
+
+        if (!request.images().isEmpty()) {
+            for (int i = 0; i < request.images().size(); i++) {
+                String imageUrl = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
+                ImageEntity imageEntity = ImageEntity.of(imageUrl, i, createdProgram);
+                images.add(imageEntity);
+            }
+            imageRepository.saveAll(images);
         }
-        imageRepository.saveAll(images);
 
         return EnrollProgramResponse.from(createdProgram.getProgramNumber());
     }
