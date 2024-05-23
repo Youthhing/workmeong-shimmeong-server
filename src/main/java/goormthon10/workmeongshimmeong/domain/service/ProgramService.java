@@ -41,7 +41,7 @@ public class ProgramService {
         Member host = memberService.findMember(request.hostEmail(), MemberType.HOST);
 
         Program createdProgram = Program.builder()
-                .name(request.spaceName())
+                .name(request.programName())
                 .startDateTime(request.startDate())
                 .roadNameAddress(request.roadNameAddress())
                 .category(request.type())
