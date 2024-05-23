@@ -29,6 +29,8 @@ public record EnrollSpaceRequest(
         SpaceType type,
 
         @NotNull
-        List<MultipartFile> images
+        List<MultipartFile> images,
+
+        List<String> tagNames
 ) {
 }
