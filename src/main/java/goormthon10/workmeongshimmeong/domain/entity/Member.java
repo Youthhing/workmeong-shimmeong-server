@@ -29,7 +29,7 @@ public class Member {
     @Column(name = "member_name")
     private String name;
 
-    @Column(name = "member_type", nullable = false)
+    @Column(name = "member_type")
     @Enumerated(EnumType.STRING)
     private MemberType type;
 
