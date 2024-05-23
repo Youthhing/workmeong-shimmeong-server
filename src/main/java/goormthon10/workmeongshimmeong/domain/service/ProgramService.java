@@ -40,9 +40,15 @@ public class ProgramService {
 
     @Transactional
     public EnrollProgramResponse enrollSpace(EnrollProgramRequest request) throws ImageException {
-        Member host = memberService.findMember(request.hostEmail(), request.description(), MemberType.HOST);
+//        Member host = memberService.findMember(request.hostEmail(), request.description(), MemberType.HOST);
 
-        host.updateDescription(request.description());
+//        host.updateDescription(request.description());
+//        memberRepository.save(host);
+
+        Member host = Member.builder()
+                .email(request.hostEmail())
+                .description(request.description())
+                .build();
         memberRepository.save(host);
 
         Program createdProgram = Program.builder()
