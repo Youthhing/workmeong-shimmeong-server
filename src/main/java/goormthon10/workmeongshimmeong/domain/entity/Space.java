@@ -37,9 +37,6 @@ public class Space {
     @Column(name = "space_description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-//    @Column(name = "space_zipcode", nullable = false)
-//    private String zipCode;
-
     @Column(name = "space_road_name_address", nullable = false)
     private String roadNameAddress;
 
