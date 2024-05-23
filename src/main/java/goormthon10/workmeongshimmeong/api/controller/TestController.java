@@ -1,6 +1,5 @@
 package goormthon10.workmeongshimmeong.api.controller;
 
-import goormthon10.workmeongshimmeong.domain.service.TagService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TestController {
 
-    private final TagService tagService;
-
     @ApiResponse(description = "상태 체크 API")
     @GetMapping
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("OK");
-    }
-
-    @PostMapping("/init")
-    public ResponseEntity<Void> initTags() {
-        tagService.initTags();
-        return ResponseEntity.noContent().build();
     }
 }
