@@ -15,7 +15,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://k8a8dc958104ca.user-app.krampoline.com/");
+        config.addAllowedOrigin("*");
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
