@@ -15,6 +15,7 @@ RUN ./gradlew clean build
 
 # DATABASE_URL을 환경 변수로 삽입
 ENV DATABASE_URL=jdbc:mariadb://mariadb/krampoline
+ENV S3_BUCKET="workmeong"
 
 # 빌드 결과 jar 파일을 실행
 CMD ["java", "-jar", "-Dspring.profiles.active=prod", "/home/gradle/project/build/libs/workmeong-shimmeong-0.0.1-SNAPSHOT.jar"]
