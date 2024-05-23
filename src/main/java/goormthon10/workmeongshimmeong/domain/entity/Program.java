@@ -50,7 +50,7 @@ public class Program {
     @Column(name = "program_chat_link")
     private String chatLink;
 
-    @Column(name = "space_type", nullable = false)
+    @Column(name = "space_type")
     @Enumerated(EnumType.STRING)
     private ProgramCategory category;
 
