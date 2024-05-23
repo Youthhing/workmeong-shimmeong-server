@@ -13,7 +13,7 @@ public enum ErrorCode {
 
     IMAGE_PROCESSING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "I-500", "이미지 업로드 과정에서의 에러 발생"),
     IMAGE_DELETE_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "I-501"," 이미지 삭제과정에서 에러 발생"),
-    ;
+    SQL_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "S-011", "SQL 에러 발생");
     private final HttpStatus status;
     private final String code;
     private final String message;
