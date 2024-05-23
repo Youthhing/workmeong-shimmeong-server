@@ -31,4 +31,15 @@ public class Member {
 
     @Column(name = "member_phone", nullable = false)
     private String phoneNumber;
+
+    private Member(String email, String phoneNumber, MemberType type) {
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+    }
+
+    public static Member of(String email, String phoneNumber, MemberType type) {
+        return new Member(email, phoneNumber, type);
+    }
+
 }
