@@ -10,10 +10,12 @@ import goormthon10.workmeongshimmeong.common.s3.S3Uploader;
 import goormthon10.workmeongshimmeong.domain.entity.ImageEntity;
 import goormthon10.workmeongshimmeong.domain.entity.Member;
 import goormthon10.workmeongshimmeong.domain.entity.Space;
+import goormthon10.workmeongshimmeong.domain.entity.TagEntity;
 import goormthon10.workmeongshimmeong.domain.enums.MemberType;
 import goormthon10.workmeongshimmeong.domain.enums.SpaceStatus;
 import goormthon10.workmeongshimmeong.domain.repository.ImageRepository;
 import goormthon10.workmeongshimmeong.domain.repository.SpaceRepository;
+import goormthon10.workmeongshimmeong.domain.repository.TagRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class SpaceService {
     private final MemberService memberService;
     private final SpaceRepository spaceRepository;
     private final ImageRepository imageRepository;
+    private final TagRepository tagRepository;
     private final S3Uploader s3Uploader;
 
     @Transactional
@@ -57,7 +60,10 @@ public class SpaceService {
             images.add(imageEntity);
         }
         imageRepository.saveAll(images);
-
+        List<TagEntity> tagEntities = request.tagNames().stream()
+                .map(TagEntity::from)
+                .toList();
+        tagRepository.saveAll(tagEntities);
         return EnrollSpaceResponse.from(createdSpace.getSpaceNumber());
     }
 
