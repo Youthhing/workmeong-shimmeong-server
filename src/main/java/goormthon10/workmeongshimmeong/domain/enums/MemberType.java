@@ -7,10 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MemberType {
 
-    HOST("ROLE_HOST", "공급자"),
-    GUEST("ROLE_GUEST", "소비자")
+    HOST,
+    GUEST
     ;
-
-    private final String role;
-    private final String description;
 }
