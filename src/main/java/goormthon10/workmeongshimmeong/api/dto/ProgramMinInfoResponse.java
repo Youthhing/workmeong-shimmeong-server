@@ -6,7 +6,8 @@ public record ProgramMinInfoResponse(
         Long id,
         String name,
         Long price,
-        String mainImage
+        String mainImage,
+        String startDate
 ) {
 
     public static ProgramMinInfoResponse of(Program program, String mainImage) {
@@ -14,7 +15,8 @@ public record ProgramMinInfoResponse(
                 program.getId(),
                 program.getName(),
                 program.getPrice(),
-                mainImage
+                mainImage,
+                program.getStartDateTime()
         );
     }
 }
