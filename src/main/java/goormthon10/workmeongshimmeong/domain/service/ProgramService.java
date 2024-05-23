@@ -49,7 +49,7 @@ public class ProgramService {
                 .name(request.programName())
                 .startDateTime(request.startDate())
                 .roadNameAddress(request.roadNameAddress())
-                .category(request.type())
+                .category(request.category())
                 .description(request.description())
                 .member(host)
                 .startDateTime(request.startDate())
