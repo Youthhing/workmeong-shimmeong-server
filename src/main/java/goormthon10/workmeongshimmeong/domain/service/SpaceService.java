@@ -3,6 +3,7 @@ package goormthon10.workmeongshimmeong.domain.service;
 import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollSpaceResponse;
+import goormthon10.workmeongshimmeong.api.dto.ImageResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfoResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceInfosResponse;
 import goormthon10.workmeongshimmeong.api.dto.SpaceMinInfoResponse;
@@ -72,8 +73,8 @@ public class SpaceService {
         Space findSpace = spaceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 숙소의 상세페이지를 찾을 수 없습니다."));
 
-        List<String> images = imageRepository.findAllBySpaceId(findSpace.getId()).stream()
-                .map(ImageEntity::getUrl)
+        List<ImageResponse> images = imageRepository.findAllBySpaceId(findSpace.getId()).stream()
+                .map(ImageResponse::from)
                 .toList();
         List<String> tags = tagRepository.findAllBySpaceId(findSpace.getId()).stream()
                 .map(TagEntity::getTag)

@@ -8,16 +8,15 @@ public record SpaceInfoResponse(
         Long id,
         String name,
         String description,
-
         String roadNameAddress,
         LocalDate startDate,
         LocalDate endDate,
-        List<String> images,
+        List<ImageResponse> images,
         List<String> tags
 
 ) {
 
-    public static SpaceInfoResponse of(Space space, List<String> images, List<String> tags) {
+    public static SpaceInfoResponse of(Space space, List<ImageResponse> images, List<String> tags) {
         return new SpaceInfoResponse(
                 space.getId(),
                 space.getName(),
