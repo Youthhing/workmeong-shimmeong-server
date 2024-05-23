@@ -30,6 +30,7 @@ public class SpaceService {
                 .roadNameAddress(request.roadNameAddress())
                 .type(request.type())
                 .spaceNumber(UUID.randomUUID())
+                .description(request.description())
                 .member(host)
                 .build();
 
