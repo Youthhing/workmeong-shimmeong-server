@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +26,9 @@ public class Member {
     @Column(name = "member_email", nullable = false, length = 50)
     private String email;
 
+    @Column(name = "member_name")
+    private String name;
+
     @Column(name = "member_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private MemberType type;
@@ -32,14 +36,11 @@ public class Member {
     @Column(name = "member_phone", nullable = false)
     private String phoneNumber;
 
-    private Member(String email, String phoneNumber, MemberType type) {
+    @Builder
+    public Member(String email, String name, String phoneNumber, MemberType type) {
         this.email = email;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.type = type;
     }
-
-    public static Member of(String email, String phoneNumber, MemberType type) {
-        return new Member(email, phoneNumber, type);
-    }
-
 }

@@ -10,9 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,7 +39,10 @@ public class Reservation {
     private LocalDate startDate;
 
     @Column(name = "reservation_end", nullable = false)
-    private LocalDate startEnd;
+    private LocalDate endDate;
+
+    @Column(name = "reservation_nubmer", nullable = false, unique = true)
+    private UUID number;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_id")
@@ -47,4 +50,16 @@ public class Reservation {
 
     @Column(name = "guest_id", nullable = false)
     private Long guestId;
+
+    private Reservation(LocalDate startDate, LocalDate endDate, Space space, Long guestId) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.space = space;
+        this.guestId = guestId;
+        this.number = UUID.randomUUID();
+    }
+
+    public static Reservation of(LocalDate startDate, LocalDate endDate, Space space, Long guestId) {
+        return new Reservation(startDate, endDate, space, guestId);
+    }
 }
