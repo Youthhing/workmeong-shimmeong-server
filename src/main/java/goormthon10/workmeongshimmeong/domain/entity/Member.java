@@ -36,11 +36,19 @@ public class Member {
     @Column(name = "member_phone", nullable = false)
     private String phoneNumber;
 
+    @Column(name = "member_description", columnDefinition = "TEXT")
+    private String description;
+
     @Builder
-    public Member(String email, String name, String phoneNumber, MemberType type) {
+    public Member(String email, String name, String phoneNumber, MemberType type, String description) {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.type = type;
+        this.description = description;
+    }
+
+    public void updateDescription(String description) {
+        this.description = description;
     }
 }

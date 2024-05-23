@@ -11,6 +11,8 @@ public record EnrollProgramRequest(
         @Email
         @NotBlank
         String hostEmail,
+
+        String hostDescription,
         @NotNull
         String programName,
         @NotNull
