@@ -55,7 +55,7 @@ public class Space {
 
     @Column(name = "space_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    @ColumnDefault(value = "'RESERVED'")
+    @ColumnDefault(value = "'AVAILABLE'")
     private SpaceStatus status;
 
     @Column(name = "space_number", nullable = false, unique = true)
