@@ -1,3 +1,18 @@
 spring:
   profiles:
     active: local
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+cloud:
+  aws:
+    s3:
+      bucket: ${S3_BUCKET}
+    credentials:
+      accessKey: ${S3_ACCESS}
+      secretKey: ${S3_SECRET}
+    stack.auto: false
+    region.static: ap-northeast-2
