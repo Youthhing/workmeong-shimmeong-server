@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME="WORK-MEONG"
+PROJECT_NAME="workmeong-shimmeong-server"
 JAR_PATH="/home/ubuntu/backend/$PROJECT_NAME/build/libs/*.jar"
 DEPLOY_PATH=/home/ubuntu/backend/$PROJECT_NAME/
 DEPLOY_LOG_PATH="/home/ubuntu/backend/$PROJECT_NAME/deploy_$(date +%Y%m%d).log"
