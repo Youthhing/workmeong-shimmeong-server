@@ -28,10 +28,11 @@ public class ProgramController {
 
     private final ProgramService programService;
 
-    @ApiResponse(description = "프로그램 추가 API")
+//    @ApiResponse(description = "프로그램 추가 API")
     @PostMapping(value = "/add", consumes = "multipart/form-data")
     public ResponseEntity<EnrollProgramResponse> enrollSpace(@ModelAttribute EnrollProgramRequest request)
             throws ImageException {
+//        request.images().
         return ResponseEntity.status(HttpStatus.CREATED).body(programService.enrollSpace(request));
     }
 
