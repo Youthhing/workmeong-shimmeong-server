@@ -45,7 +45,7 @@ public class S3Uploader {
     }
 
     private String upload(File uploadFile, String dirName, String originalName) {
-        String fileName = dirName + "/" + UUID.randomUUID() + originalName;
+        String fileName = generateFileName(dirName, originalName);
         String uploadUrl = putS3(uploadFile, fileName);
         removeNewFile(uploadFile);
         log.info(uploadUrl);
@@ -85,5 +85,11 @@ public class S3Uploader {
         }
         log.info("convert empty");
         return Optional.empty();
+    }
+
+    private String generateFileName(String dirName, String originalName) {
+        String extension = originalName.substring(originalName.lastIndexOf('.'));
+        String baseName = originalName.substring(0, originalName.lastIndexOf('.'));
+        return dirName + "/" + baseName + "_" + UUID.randomUUID().toString() + extension;
     }
 }
