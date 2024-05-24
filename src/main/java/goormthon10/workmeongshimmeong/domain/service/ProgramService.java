@@ -69,6 +69,8 @@ public class ProgramService {
                 .price(request.price())
                 .chatLink(request.chatLink())
                 .spendTime(request.spendTime())
+                .chatLink(request.chatLink())
+                .description(request.description())
                 .build();
 
         programRepository.save(createdProgram);
