@@ -48,39 +48,37 @@ public class ProgramService {
 //        host.updateDescription(request.description());
 //        memberRepository.save(host);
 
-        log.info("[등록자 이메일]: {}", request.hostEmail());
-        log.info("[등록자 소개글]: {}", request.hostDescription());
-        log.info("[프로그램 이름 ]: {}", request.programName());
-        log.info("[가격]: {}", request.price());
+        log.info("[등록자 이메일]: {}", request.getHostEmail());
+        log.info("[등록자 소개글]: {}", request.getHostDescription());
+        log.info("[프로그램 이름 ]: {}", request.getProgramName());
+        log.info("[가격]: {}", request.getPrice());
 
         Member host = Member.builder()
-                .email(request.hostEmail())
-                .description(request.hostDescription())
+                .email(request.getHostEmail())
+                .description(request.getHostDescription())
                 .build();
         memberRepository.save(host);
 
         Program createdProgram = Program.builder()
-                .name(request.programName())
-                .startDateTime(request.startDate())
-                .roadNameAddress(request.roadNameAddress())
-                .category(request.category())
-                .description(request.description())
+                .name(request.getProgramName())
+                .roadNameAddress(request.getRoadNameAddress())
+                .category(request.getCategory())
+                .description(request.getDescription())
                 .member(host)
-                .startDateTime(request.startDate())
-                .price(request.price())
-                .chatLink(request.chatLink())
-                .spendTime(request.spendTime())
-                .chatLink(request.chatLink())
-                .description(request.description())
+                .startDateTime(request.getStartDate())
+                .price(request.getPrice())
+                .chatLink(request.getChatLink())
+                .spendTime(request.getSpendTime())
+                .description(request.getDescription())
                 .build();
 
         programRepository.save(createdProgram);
 
         List<ImageEntity> images = new ArrayList<>();
 
-        if (request.images() != null && !request.images().isEmpty()) {
-            for (int i = 0; i < request.images().size(); i++) {
-                String imageUrl = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
+        if (request.getImages() != null && !request.getImages().isEmpty()) {
+            for (int i = 0; i < request.getImages().size(); i++) {
+                String imageUrl = s3Uploader.uploadFiles(request.getImages().get(i), IMAGE_DIR);
                 ImageEntity imageEntity = ImageEntity.of(imageUrl, i, createdProgram);
                 images.add(imageEntity);
             }
