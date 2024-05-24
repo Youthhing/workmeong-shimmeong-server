@@ -106,17 +106,18 @@ public class ProgramService {
 
         List<ProgramMinInfoResponse> exists = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
                 .stream()
-                .filter(program -> findMainImages(program) != null)
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
+                .filter(programMinInfoResponse -> programMinInfoResponse.mainImage() != null)
                 .sorted(Comparator.comparing(ProgramMinInfoResponse::id).reversed())
                 .toList();
 
         List<ProgramMinInfoResponse> notExists = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
                 .stream()
-                .filter(program -> findMainImages(program) == null)
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
+                .filter(programMinInfoResponse -> programMinInfoResponse.mainImage() == null)
                 .sorted(Comparator.comparing(ProgramMinInfoResponse::id).reversed())
                 .toList();
+
         availablePrograms.addAll(exists);
         availablePrograms.addAll(notExists);
 
