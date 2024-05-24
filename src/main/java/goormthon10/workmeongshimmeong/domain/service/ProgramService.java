@@ -95,10 +95,22 @@ public class ProgramService {
     }
 
     public ProgramInfosResponse findPrograms() {
-        List<ProgramMinInfoResponse> availablePrograms = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
+        List<ProgramMinInfoResponse> availablePrograms = new ArrayList<>();
+
+        List<ProgramMinInfoResponse> exists = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
                 .stream()
+                .filter(program -> findMainImages(program) != null)
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
                 .toList();
+
+        List<ProgramMinInfoResponse> notExists = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
+                .stream()
+                .filter(program -> findMainImages(program) == null)
+                .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
+                .toList();
+        availablePrograms.addAll(exists);
+        availablePrograms.addAll(notExists);
+
         return ProgramInfosResponse.from(availablePrograms);
     }
 
