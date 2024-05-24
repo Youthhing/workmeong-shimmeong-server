@@ -55,7 +55,7 @@ public class ProgramService {
 
         Member host = Member.builder()
                 .email(request.hostEmail())
-                .description(request.description())
+                .description(request.hostDescription())
                 .build();
         memberRepository.save(host);
 
