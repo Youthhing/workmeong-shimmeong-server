@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public record EnrollProgramRequest(
 //        @Email
-        @NotBlank
         String hostEmail,
 
         String hostDescription,

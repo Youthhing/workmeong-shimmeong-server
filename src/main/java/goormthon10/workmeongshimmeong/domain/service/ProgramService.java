@@ -48,6 +48,10 @@ public class ProgramService {
 //        memberRepository.save(host);
 
         log.info("[등록자 이메일]: {}", request.hostEmail());
+        log.info("[등록자 소개글]: {}", request.hostDescription());
+        log.info("[프로그램 이름 ]: {}", request.programName());
+        log.info("[가격]: {}", request.price());
+
         Member host = Member.builder()
                 .email(request.hostEmail())
                 .description(request.description())
