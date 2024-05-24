@@ -20,6 +20,7 @@ import goormthon10.workmeongshimmeong.domain.repository.MemberRepository;
 import goormthon10.workmeongshimmeong.domain.repository.ProgramRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -107,12 +108,14 @@ public class ProgramService {
                 .stream()
                 .filter(program -> findMainImages(program) != null)
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
+                .sorted(Comparator.comparing(ProgramMinInfoResponse::id).reversed())
                 .toList();
 
         List<ProgramMinInfoResponse> notExists = programRepository.findAllByStatus(ProgramStatus.AVAILABLE)
                 .stream()
                 .filter(program -> findMainImages(program) == null)
                 .map(program -> ProgramMinInfoResponse.of(program, findMainImages(program)))
+                .sorted(Comparator.comparing(ProgramMinInfoResponse::id).reversed())
                 .toList();
         availablePrograms.addAll(exists);
         availablePrograms.addAll(notExists);
