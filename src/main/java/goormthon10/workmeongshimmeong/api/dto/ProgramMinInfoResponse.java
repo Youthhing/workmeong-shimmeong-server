@@ -9,7 +9,8 @@ public record ProgramMinInfoResponse(
         String mainImage,
         String startDate,
         Double latitude,
-        Double longitude
+        Double longitude,
+        String userName
 ) {
 
     public static ProgramMinInfoResponse of(Program program, String mainImage) {
@@ -20,7 +21,8 @@ public record ProgramMinInfoResponse(
                 mainImage,
                 program.getStartDateTime(),
                 program.getLocation().getLatitude(),
-                program.getLocation().getLongitude()
+                program.getLocation().getLongitude(),
+                program.getMember().getName()
         );
     }
 }
