@@ -1,16 +1,13 @@
 package goormthon10.workmeongshimmeong.api.dto;
 
 import goormthon10.workmeongshimmeong.domain.enums.ProgramCategory;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import org.springframework.web.multipart.MultipartFile;
-
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -35,6 +32,11 @@ public class EnrollProgramRequest {
     private Long spendTime;
 
     @NotNull
+    private Double latitude;
+    @NotNull
+    private Double longitude;
+
+    @NotNull
     private ProgramCategory category;
 
     @NotNull
@@ -47,6 +49,4 @@ public class EnrollProgramRequest {
     public EnrollProgramRequest() {
         this.images = new ArrayList<>();
     }
-
-    // Getters and setters for all fields (hostEmail, hostDescription, etc.) are omitted for brevity
 }
