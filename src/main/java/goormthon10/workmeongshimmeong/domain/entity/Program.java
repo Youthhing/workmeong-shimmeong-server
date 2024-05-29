@@ -77,7 +77,7 @@ public class Program {
     @Builder
     public Program(String name, String description, String roadNameAddress,
                    ProgramCategory category, Member member, Long spendTime, Long price, String startDateTime,
-                   String chatLink) {
+                   String chatLink, Location location) {
         this.name = name;
         this.description = description;
         this.roadNameAddress = roadNameAddress;
@@ -88,5 +88,6 @@ public class Program {
         this.member = member;
         this.programNumber = UUID.randomUUID();
         this.chatLink = chatLink;
+        this.location = location;
     }
 }

@@ -8,7 +8,6 @@ public record ProgramMinInfoResponse(
         Long price,
         String mainImage,
         String startDate,
-
         Double latitude,
         Double longitude
 ) {

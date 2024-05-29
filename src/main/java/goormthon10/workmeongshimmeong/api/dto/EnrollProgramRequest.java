@@ -15,6 +15,8 @@ public class EnrollProgramRequest {
     @Email
     private String hostEmail;
 
+    private String hostName;
+
     private String hostDescription;
 
     @NotNull
