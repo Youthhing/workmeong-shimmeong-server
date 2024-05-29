@@ -2,13 +2,13 @@ package goormthon10.workmeongshimmeong.api.dto;
 
 import goormthon10.workmeongshimmeong.domain.entity.Member;
 import goormthon10.workmeongshimmeong.domain.entity.Program;
-import java.time.LocalDate;
 import java.util.List;
 
 public record ProgramInfoResponse(
         Long id,
         String name,
         String description,
+        String userName,
         String roadNameAddress,
         String startDate,
         Long spendTime,
@@ -23,6 +23,7 @@ public record ProgramInfoResponse(
                 program.getId(),
                 program.getName(),
                 program.getDescription(),
+                member.getName(),
                 program.getRoadNameAddress(),
                 program.getStartDateTime(),
                 program.getSpendTime(),
