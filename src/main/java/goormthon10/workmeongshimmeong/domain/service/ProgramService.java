@@ -10,10 +10,10 @@ import goormthon10.workmeongshimmeong.api.dto.ProgramInfosResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramMinInfoResponse;
 import goormthon10.workmeongshimmeong.common.error.ImageException;
 import goormthon10.workmeongshimmeong.common.s3.S3Uploader;
+import goormthon10.workmeongshimmeong.domain.embbeded.Location;
 import goormthon10.workmeongshimmeong.domain.entity.ImageEntity;
 import goormthon10.workmeongshimmeong.domain.entity.Member;
 import goormthon10.workmeongshimmeong.domain.entity.Program;
-import goormthon10.workmeongshimmeong.domain.enums.MemberType;
 import goormthon10.workmeongshimmeong.domain.enums.ProgramStatus;
 import goormthon10.workmeongshimmeong.domain.repository.ImageRepository;
 import goormthon10.workmeongshimmeong.domain.repository.MemberRepository;
@@ -55,6 +55,7 @@ public class ProgramService {
 
         Member host = Member.builder()
                 .email(request.getHostEmail())
+                .name(request.getHostName())
                 .description(request.getHostDescription())
                 .build();
         memberRepository.save(host);
@@ -70,6 +71,7 @@ public class ProgramService {
                 .chatLink(request.getChatLink())
                 .spendTime(request.getSpendTime())
                 .description(request.getDescription())
+                .location(Location.of(request.getLatitude(), request.getLongitude()))
                 .build();
 
         programRepository.save(createdProgram);
