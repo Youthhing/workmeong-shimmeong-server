@@ -7,7 +7,10 @@ public record ProgramMinInfoResponse(
         String name,
         Long price,
         String mainImage,
-        String startDate
+        String startDate,
+
+        Double latitude,
+        Double longitude
 ) {
 
     public static ProgramMinInfoResponse of(Program program, String mainImage) {
@@ -16,7 +19,9 @@ public record ProgramMinInfoResponse(
                 program.getName(),
                 program.getPrice(),
                 mainImage,
-                program.getStartDateTime()
+                program.getStartDateTime(),
+                program.getLocation().getLatitude(),
+                program.getLocation().getLongitude()
         );
     }
 }

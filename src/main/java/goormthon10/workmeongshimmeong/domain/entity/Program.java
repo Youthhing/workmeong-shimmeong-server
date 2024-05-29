@@ -1,8 +1,10 @@
 package goormthon10.workmeongshimmeong.domain.entity;
 
+import goormthon10.workmeongshimmeong.domain.embbeded.Location;
 import goormthon10.workmeongshimmeong.domain.enums.ProgramCategory;
 import goormthon10.workmeongshimmeong.domain.enums.ProgramStatus;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -53,6 +55,9 @@ public class Program {
     @Column(name = "space_type")
     @Enumerated(EnumType.STRING)
     private ProgramCategory category;
+
+    @Embedded
+    private Location location;
 
     @Column(name = "space_status", nullable = false)
     @Enumerated(EnumType.STRING)
