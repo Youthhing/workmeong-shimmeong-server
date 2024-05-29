@@ -32,7 +32,6 @@ public class ProgramController {
     @PostMapping(value = "/add", consumes = "multipart/form-data")
     public ResponseEntity<EnrollProgramResponse> enrollSpace(@ModelAttribute EnrollProgramRequest request)
             throws ImageException {
-//        request.images().
         return ResponseEntity.status(HttpStatus.CREATED).body(programService.enrollSpace(request));
     }
 
