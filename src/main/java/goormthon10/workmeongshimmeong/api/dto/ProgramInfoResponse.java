@@ -6,7 +6,7 @@ import java.util.List;
 
 public record ProgramInfoResponse(
         Long id,
-        String name,
+        String programName,
         String description,
         String userName,
         String roadNameAddress,
