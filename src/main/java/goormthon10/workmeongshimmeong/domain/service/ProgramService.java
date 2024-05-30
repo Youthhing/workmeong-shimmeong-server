@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.domain.service;
 
+import goormthon10.workmeongshimmeong.api.dto.AddImagesRequest;
 import goormthon10.workmeongshimmeong.api.dto.ChatLinkResponse;
 import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramRequest;
@@ -20,6 +21,7 @@ import goormthon10.workmeongshimmeong.domain.repository.MemberRepository;
 import goormthon10.workmeongshimmeong.domain.repository.ProgramRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -140,5 +142,24 @@ public class ProgramService {
         Program findProgram = programRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 프로그램은 존재하지 않습니다."));
         return new ChatLinkResponse(findProgram.getChatLink());
+    }
+
+    @Transactional
+    public void addImages(AddImagesRequest request, Long id) throws ImageException {
+        Program findProgram = programRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 id의 프로그램을 찾을 수 없습니다."));
+
+        int maxOrder = imageRepository.findAllByProgramId(id).stream()
+                .map(ImageEntity::getOrder)
+                .max(Comparator.comparing(Integer::intValue))
+                .orElse(0);
+
+        List<ImageEntity> imageEntities = new ArrayList<>();
+        for (int i = 0; i < request.images().size(); i++) {
+            String url = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
+            imageEntities.add(ImageEntity.of(url, maxOrder + i + 1 ,findProgram));
+        }
+
+        imageRepository.saveAll(imageEntities);
     }
 }
