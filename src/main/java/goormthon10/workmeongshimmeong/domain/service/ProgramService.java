@@ -9,6 +9,7 @@ import goormthon10.workmeongshimmeong.api.dto.ImageResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramInfoResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramInfosResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramMinInfoResponse;
+import goormthon10.workmeongshimmeong.api.dto.UpdateProgramDetailRequest;
 import goormthon10.workmeongshimmeong.common.error.ImageException;
 import goormthon10.workmeongshimmeong.common.s3.S3Uploader;
 import goormthon10.workmeongshimmeong.domain.embbeded.Location;
@@ -157,9 +158,22 @@ public class ProgramService {
         List<ImageEntity> imageEntities = new ArrayList<>();
         for (int i = 0; i < request.images().size(); i++) {
             String url = s3Uploader.uploadFiles(request.images().get(i), IMAGE_DIR);
-            imageEntities.add(ImageEntity.of(url, maxOrder + i + 1 ,findProgram));
+            imageEntities.add(ImageEntity.of(url, maxOrder + i + 1, findProgram));
         }
 
         imageRepository.saveAll(imageEntities);
+    }
+
+    @Transactional
+    public void updateDetails(UpdateProgramDetailRequest request) {
+        Program findProgram = programRepository.findById(request.programId())
+                .orElseThrow(() -> new EntityNotFoundException("해당 프로그램을 찾을 수 없습니다."));
+
+        findProgram.updateDescription(request.programDescription());
+        findProgram.updateRoadNameAddress(request.roadNameAddress());
+        findProgram.getMember().updateDescription(request.hostDescription());
+
+        programRepository.save(findProgram);
+        memberRepository.save(findProgram.getMember());
     }
 }

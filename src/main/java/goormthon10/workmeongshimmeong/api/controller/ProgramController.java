@@ -7,6 +7,7 @@ import goormthon10.workmeongshimmeong.api.dto.EnrollProgramRequest;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramInfoResponse;
 import goormthon10.workmeongshimmeong.api.dto.ProgramInfosResponse;
+import goormthon10.workmeongshimmeong.api.dto.UpdateProgramDetailRequest;
 import goormthon10.workmeongshimmeong.common.error.ImageException;
 import goormthon10.workmeongshimmeong.domain.service.ProgramService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,9 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,4 +71,10 @@ public class ProgramController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponse(description = "특정 프로그램의 상세 정보를 수정한다.")
+    @PatchMapping
+    public ResponseEntity<Void> updateProgramDetails(@RequestBody UpdateProgramDetailRequest request) {
+        programService.updateDetails(request);
+        return ResponseEntity.noContent().build();
+    }
 }
