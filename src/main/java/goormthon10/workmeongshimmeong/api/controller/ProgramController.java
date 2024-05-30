@@ -1,5 +1,6 @@
 package goormthon10.workmeongshimmeong.api.controller;
 
+import goormthon10.workmeongshimmeong.api.dto.AddImagesRequest;
 import goormthon10.workmeongshimmeong.api.dto.ChatLinkResponse;
 import goormthon10.workmeongshimmeong.api.dto.DateResponse;
 import goormthon10.workmeongshimmeong.api.dto.EnrollProgramRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +30,7 @@ public class ProgramController {
 
     private final ProgramService programService;
 
-//    @ApiResponse(description = "프로그램 추가 API")
+    //    @ApiResponse(description = "프로그램 추가 API")
     @PostMapping(value = "/add", consumes = "multipart/form-data")
     public ResponseEntity<EnrollProgramResponse> enrollSpace(@ModelAttribute EnrollProgramRequest request)
             throws ImageException {
@@ -57,4 +59,13 @@ public class ProgramController {
     public ResponseEntity<ChatLinkResponse> getChatLink(@PathVariable("program-id") Long id) {
         return ResponseEntity.ok().body(programService.findChatLink(id));
     }
+
+    @ApiResponse(description = "특정 프로그램에 사진을 추가한다.")
+    @PostMapping(value = "/{program-id}/images", consumes = "multipart/form-data")
+    public ResponseEntity<Void> enrollAdditionalImages(@PathVariable("program-id") Long id,
+                                                       @ModelAttribute AddImagesRequest request) throws ImageException {
+        programService.addImages(request, id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
