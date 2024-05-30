@@ -90,4 +90,12 @@ public class Program {
         this.chatLink = chatLink;
         this.location = location;
     }
+
+    public void updateDescription(String description) {
+        this.description = description;
+    }
+
+    public void updateRoadNameAddress(String roadNameAddress) {
+        this.roadNameAddress = roadNameAddress;
+    }
 }
